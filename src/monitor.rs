@@ -28,6 +28,8 @@ pub struct Builder {
     monitor: *mut ffi::udev_monitor,
 }
 
+unsafe impl Send for Builder { }
+
 impl Clone for Builder {
     fn clone(&self) -> Self {
         Self {
@@ -136,6 +138,8 @@ impl Builder {
 pub struct Socket {
     inner: Builder,
 }
+
+unsafe impl Send for Socket { }
 
 impl AsRaw<ffi::udev_monitor> for Socket {
     fn as_raw(&self) -> *mut ffi::udev_monitor {

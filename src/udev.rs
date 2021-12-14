@@ -19,6 +19,8 @@ pub struct Udev {
     udev: *mut ffi::udev,
 }
 
+unsafe impl Send for Udev { }
+
 impl Clone for Udev {
     fn clone(&self) -> Self {
         unsafe { Self::from_raw(ffi::udev_ref(self.udev)) }
